@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charet="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale,maximum-scale=1">
+	<title>AWL </title>
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-
+	static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/dashboard.css') }}">
+
+</head>
+<body>
+	<input type="checkbox" id="nav-toggle">
+	<div class="sidebar">
+		<div class="sidebar-brand">
+			<h2><span class="las la-accusoft"></span> <span>AWL RETAILERS</span></h2>
+		</div>
+
+		<div class="sidebar-menu">
+			<ul>
+				<li>
+					<a href="/dashboard"><span class="las la-igloo"></span>
+						<span>Dashboard </span></a>
+				</li>
+				<li>
+					<a href="/Myaccount"><span class="las la-users"></span>
+						<span>My account</span></a>
+				</li>
+				<li>
+					<a href="" class="active"><span class="las la-receipt"></span>
+						<span>Inventory</span></a>
+				</li>
+				<li>
+					<a href="/Contactus"><span class="las la id-card"></span>
+						<span>Contact us </span></a>
+				</li>
+                <li>
+					<a href="/Signout" height="50%"><span class="las la-shipping-bag"></span>
+						<span>Sign out</span></a>
+				</li>
+               
+			</ul>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<header>
+			<h1>
+				<label for="nav-toggle">
+					<span class="las la-bars"></span>
+				</label>
+				INVENTORY 
+			</h1>
+		</header>
+
+		<main>
+      <div class="recent-grid">
+				<div class="projects">
+          {% block content %}
+          <div class="container">
+              {% for message in get_flashed_messages() %}
+              <div class="alert" style="background-color: #f44336; color: white; padding: 35px;">
+                <span class="closebtn" style="float: right;cursor: pointer;transition: 0.3s;font-size: 25px;font-weight: bold;padding-top: 2px;" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>{{ message }}</strong>
+              </div>
+              {% endfor %}
+          </div>
+          {% endblock %}
+        </div>
+    </div>
+
+			<div class="recent-grid">
+				<div class="projects">
+					
+          <div class="card">
+            <div class="card-header">
+              <h2>Update existing items in inventory</h2>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <form action="{{ url_for('updateInventory')}}" method="post">
+                  <input type="hidden" name="operation" value="update"/>
+                  <table width="100%">
+                    <thead>
+                      <tr>
+                        <td>Item name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select name="item" id="item">
+                            {% for item in data %}
+                              <option value='{{item.Item}}'>{{item.Item}}</option>
+                            {% endfor %}
+                          </select> 
+                        </td>
+                        <td><input type="number" name="Price" placeholder="Your new price" style="color:black"/></td>
+                        <td><input type="number" name="Quantity" placeholder="Add  Quantity" style="color:black"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <tr>
+                    <td></td>
+                    <td><button type="submit" class="btn btn-primary btn-block btn-large">Submit</button></td>
+                    <td></td>
+                  </tr>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-grid">
+				<div class="projects">
+          <div class="card">
+            <div class="card-header">
+              <h2>Add a new item in inventory</h2>
+            </div>
+
+            <div class="card-body-update">
+              <div class="table-responsive">
+                <form action="{{ url_for('updateInventory')}}" method="post">
+                  <input type="hidden" name="operation" value="add"/>
+                  <table width="100%">
+                    <thead>
+                      <tr>
+                        <td>Item name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" name="Item1" placeholder="Enter Item name" required="required" style="color:black"/></td>
+                        <td><input type="number" name="Price1" placeholder="Your new price" required="required" style="color:black"/></td>
+                        <td><input type="number" name="Price" placeholder="Add  Quantity" required="required" style="color:black"/></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-primary btn-block btn-large">ADD</button></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-grid">
+				<div class="projects">
+          <div class="card">
+            <div class="card-header">
+              <h2>Delete an item in inventory</h2>
+            </div>
+            <div class="card-body-update">
+              <div class="table-responsive">
+                <form action="{{ url_for('updateInventory')}}" method="post">
+                  <input type="hidden" name="operation" value="delete"/>
+                  <table width="100%">
+                    <thead>
+                      <tr>
+                        <td>Item name</td>
+                       </tr>
+                    </thead>
+                    <tbody>
+                      <tr> 
+                        <td>
+                          <select name="item" id="item">
+                          {% for item in data %}
+                                <option value='{{item.Item}}'>{{item.Item}}</option>
+                            {% endfor %}
+                          </select> 
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-primary btn-block btn-large">DELETE</button></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+		</main>
+	</div>
+</body>
+</html>

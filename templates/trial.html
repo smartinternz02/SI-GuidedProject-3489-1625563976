@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title> Registration form</title>
+        <link rel="stylesheet" type="text/css" href="registration.css">
+    </head>
+   
+   <body>
+       <div class="registration-form">
+           <h1> Registration form</h1>
+           <ul>
+           <li><a class="active" href="/login">Home</a></li>
+           </ul>
+           <form action="{{ url_for('register')}}"method="post">
+           <form action="/action_page.php" method="POST" >
+               <p>Full Name</p>
+               <input type="text" name="name" placeholder="Full Name">
+               <p>User Name</p>
+               <input type ="text" name="username" placeholder="User Name">
+                <p>Email </p>
+               <input type="text" name="email" placeholder="Email">
+               <p>Company name  </p>
+               <input type="text" name="company" placeholder="Company Name">
+               
+               <p>Phone Number</p>
+               <input type="text" name="contact" placeholder="Enter your phone number">
+               <p>Password </p>
+               <input type="password" name="password" placeholder="Password">
+   
+               <form action="nextpage.php" method="POST">
+               </form>
+            <a href="http://localhost:8080/login">
+    
+                <button type="submit" class="btn btn-primary btn-block btn-large">Register</button>
+               
+           </a>
+   
+           </form>
+           </form>
+   
+       </div>
+   </body>
+   
